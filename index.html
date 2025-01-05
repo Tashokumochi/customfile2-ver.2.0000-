@@ -59,18 +59,14 @@
 
                     if (files.length > 0) {
                         // ZIP内の全ファイルを一括でダウンロード
-                        const downloadAll = window.confirm('ZIP内のすべてのファイルをダウンロードしますか？');
-
-                        if (downloadAll) {
-                            files.forEach((filename) => {
-                                zip.files[filename].async('blob').then((blob) => {
-                                    const a = document.createElement('a');
-                                    a.href = URL.createObjectURL(blob);
-                                    a.download = filename;
-                                    a.click();
-                                });
+                        files.forEach((filename) => {
+                            zip.files[filename].async('blob').then((blob) => {
+                                const a = document.createElement('a');
+                                a.href = URL.createObjectURL(blob);
+                                a.download = filename;
+                                a.click();
                             });
-                        }
+                        });
                     } else {
                         alert('ZIP内にファイルがありません');
                     }
